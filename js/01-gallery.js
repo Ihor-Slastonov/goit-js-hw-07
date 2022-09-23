@@ -6,8 +6,8 @@ console.log(galleryItems);
 const galleryRef = document.querySelector('.gallery');
 
 const renderImages = galleryItems
-    .map(
-        item => `<div class="gallery__item">
+  .map(
+    item => `<div class="gallery__item">
   <a class="gallery__link" href="${item.original}">
     <img
       class="gallery__image"
@@ -17,23 +17,30 @@ const renderImages = galleryItems
     />
   </a>
 </div>`,
-    )
-    .join('');
+  )
+  .join('');
 
+galleryRef.innerHTML = "";
 galleryRef.insertAdjacentHTML('beforeend', renderImages);
 
-galleryRef.addEventListener('click', onClick);
+galleryRef.addEventListener('click', onImgClick);
 
-function onClick(e) {
-    e.preventDefault();
-    if (e.target === e.currentTarget) {
-        return;
-    }
-    const currentImage = e.target.dataset.source;
-
-    const instance = basicLightbox.create(`
-    <img src="${currentImage}" width="800" height="600">
+function onImgClick(e) {
+  e.preventDefault();
+  if (e.target === e.currentTarget) {
+    return;
+  }
+  const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.source}" alt="${e.target.description}" width="800" height="600">
 `);
-    instance.show();
-    console.log(instance.show);
+  instance.show();
+  document.addEventListener('keydown', onModalKeyEscClose);
+
+  function onModalKeyEscClose(e) {
+    if (e.code === 'Escape') {
+      instance.close();
+      document.removeEventListener('keydown', onModalKeyEscClose)
+    }
+    console.log(e.key);
+  }
 }
