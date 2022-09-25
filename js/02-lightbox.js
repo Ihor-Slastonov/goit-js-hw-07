@@ -13,7 +13,7 @@ const renderImages = galleryItems
     )
     .join('');
 
-galleryRef.innerHTML = "";
+galleryRef.innerHTML = '';
 galleryRef.insertAdjacentHTML('beforeend', renderImages);
 
-var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
