@@ -32,8 +32,14 @@ function onImgClick(e) {
   }
   const instance = basicLightbox.create(`
     <img src="${e.target.dataset.source}" alt="${e.target.description}" width="800" height="600">
-`);
+`, {
+    onClose: () => {
+      document.removeEventListener('keydown', onModalKeyEscClose)
+    }
+  });
+  
   instance.show();
+
   document.addEventListener('keydown', onModalKeyEscClose);
 
   function onModalKeyEscClose(e) {

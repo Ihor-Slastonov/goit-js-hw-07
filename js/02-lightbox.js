@@ -16,13 +16,4 @@ const renderImages = galleryItems
 galleryRef.innerHTML = "";
 galleryRef.insertAdjacentHTML('beforeend', renderImages);
 
-galleryRef.addEventListener('click', onImgClick);
-
-function onImgClick(e) {
-    e.preventDefault();
-    if (e.target.nodeName !== "IMG") {
-        return;
-    }
-
-    var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
-}
+var lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
